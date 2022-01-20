@@ -1,0 +1,22 @@
+DRsimDetectorConstruction.cc
+    towerLogical[i] = new G4LogicalVolume(tower,FindMaterial("Copper"),towerName);
+
+"Copper"
+    FindMaterial
+        G4LogicalVolume
+            DRsim/CMakeFiles/DRsim.dir/src/DRsimDetectorConstruction.cc.o: /cvmfs/geant4.cern.ch/geant4/10.5.p01/x86_64-centos7-gcc8-opt-MT/include/Geant4/G4LogicalVolume.hh
+
+https://apc.u-paris.fr/~franco/g4doxy/html/classG4LogicalVolume.html#948b43e2e1eb6dc0c7e1954a98975dff
+
+=================================================================================================================
+
+/fcc/tikim/HEP-FCC_dual-readout_001/dual-readout/DRsim/src/DRsimMaterials.cc
+    fCu = new G4Material("Copper", z=29., a=63.546*g/mole, density=8.96*g/cm3);
+
+"copper"
+    G4Material
+
+https://apc.u-paris.fr/~franco/g4doxy/html/classG4Material.html#c022096fe317817b620de0a1d6a471a9
+https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Appendix/materialNames.html
+z  name  density(g/cm^3) I(eV)
+29 G4_Cu 8.96            322
