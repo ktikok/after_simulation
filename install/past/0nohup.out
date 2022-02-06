@@ -1,0 +1,6 @@
+Available UI session types: [ Qt, Xm, GAG, tcsh, csh ]
+Fontconfig error: Cannot load default config file
+G4WT0 > /control/saveHistory 
+G4WT0 > /run/verbose 2
+G4WT0 > /run/initialize 
+G4WT0 > /run/physicsModified 

@@ -8,11 +8,14 @@
 #     fi  
 # done
 
-for j in 20 30 50 70 90 110
+for j in 5 10 20 30 50 70
+# for j in 20 30 50 70 90 110
 # for j in 5 10 20 30 50 70 90 110
 do
     
     # root_name="${j}GeV_${i:0:-1}"
     # cat "/data4/tikim/dual-readout/install/0_pion/3000Events/${j}GeV_pi/${root_name}_nohup.out" | grep 'Sigma\|Mean\|StdDev' > "/data4/tikim/dual-readout/install/0_pion/3000Events/${j}GeV_pi/${j}GeV_pi_CSS_MS_Error.txt"
-    cat "/fcc/tikim/HEP-FCC_dual-readout_001/dual-readout/install/ele/e_${j}GeV_51th/e_${j}GeV_51th_nohup.out" | grep 'Sigma\|Mean\|StdDev' > "/fcc/tikim/HEP-FCC_dual-readout_001/dual-readout/install/ele/${j}GeV_CSS_MS_Error.txt"
+    
+    cat "/fcc/tikim/results/ele/lead/e_${j}GeV_0th/e_${j}GeV_0th_nohup.out" | grep 'Sigma\|Mean\|StdDev' > "/fcc/tikim/results/ele/lead/${j}GeV_CSS_MS_Error.txt"
+    #    /fcc/tikim/results/ele/lead/e_5GeV_0th/e_5GeV_0th_nohup.out
 done

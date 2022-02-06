@@ -9,13 +9,13 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p);
 void ReverseXAxis (TH1 *h);
 void ReverseYAxis (TH1 *h);
 
-void ele_linearity()
+void ele_resolution()
 {
   Int_t n = 8;
   Double_t *x = new Double_t[n];
   Double_t *y = new Double_t[n];
   Double_t *e = new Double_t[n];
-  TCanvas *myc = new TCanvas("myc",  "Energy Linearity");
+  TCanvas *myc = new TCanvas("myc",  "Energy Resolution");
   myc->SetGrid();
 
   // c--------------------------------------------------------- 
@@ -26,13 +26,43 @@ void ele_linearity()
    gre2->SetLineColor(kBlue);  
   //Fit the graph with the predefined "pol3" function
 
+  gre2->Fit("pol1");
+  //Access the fit resuts
+
+  TF1 *f2 = gre2->GetFunction("pol1");
+  //f2->SetLineColor(kBlue);
+  f2->SetLineWidth(0);  
+
+
+  auto *f22 = new TGraph();
+  f22->SetPoint(0, 0.05, 0.05*(f2->GetParameter(1))+(f2->GetParameter(0)));
+  f22->SetPoint(1,0.45, 0.45*(f2->GetParameter(1))+(f2->GetParameter(0)));
+  f22->SetLineColor(kBlue);
+  f22->SetLineWidth(1);  
+
+  // TFitResultPtr r =   gre2->Fit("pol1","S");  // TFitResultPtr contains the TFitResult
+  // r->Print("V");                                // print full information of fit including covariance matrix
+  // r->Write();                                   // store the result in a file
+
 // s-------------------------------------------------
   makePoints(n, x, y, e, 3);
   TGraphErrors *gre3 = new TGraphErrors(n, x, y, 0, e);
   //gre3->Draw("a*");
     gre3->SetMarkerStyle(20);
   gre3->SetMarkerColor(kRed);
+  gre3->SetLineColor(kRed); 
   //Fit the graph with the predefined "pol3" function
+  gre3->Fit("pol1");
+  //Access the fit resuts
+  TF1 *f3 = gre3->GetFunction("pol1");
+     //f3->SetLineColor(kRed);
+  f3->SetLineWidth(0);  
+  
+  auto *f33 = new TGraph();
+  f33->SetPoint(0, 0.05, 0.05*(f3->GetParameter(1))+(f3->GetParameter(0)));
+  f33->SetPoint(1,0.45, 0.45*(f3->GetParameter(1))+(f3->GetParameter(0)));
+  f33->SetLineColor(kRed);
+  f33->SetLineWidth(1);  
 
   // sum-----------------------------------------------
   makePoints(n, x, y, e, 4);
@@ -40,54 +70,71 @@ void ele_linearity()
   //gre4->Draw("a*");
   gre4->SetMarkerStyle(20);
   gre4->SetMarkerColor(kBlack);
+  gre4->SetLineColor(kBlack); 
+  gre4->Fit("pol1");
+  //Access the fit resuts
+  
+  TF1 *f4 = gre4->GetFunction("pol1");
+    // f4->SetLineColor(kBlack);
 
-  // base line ----------------------------------------
-  auto *f22 = new TGraph();
-  f22->SetPoint(0, 5, 1);
-  f22->SetPoint(1,110, 1);
-  f22->SetLineColor(kBlack);
-  f22->SetLineWidth(2);    
+  f4->SetLineWidth(0);      
 
+  auto *f44 = new TGraph();
+  f44->SetPoint(0, 0.05, 0.05*(f4->GetParameter(1))+(f4->GetParameter(0)));
+  f44->SetPoint(1,0.45, 0.45*(f4->GetParameter(1))+(f4->GetParameter(0)));
+  f44->SetLineColor(kBlack);
+  f44->SetLineWidth(1);  
+  
 // merging ------------------------------------------------------
 
    TMultiGraph  *mg  = new TMultiGraph();
-    mg->Add(f22,"L");
     mg->Add(gre2);
     mg->Add(gre3);
     mg->Add(gre4);
-    
-    mg->Draw("A P");
+    mg->Add(f22, "L");
+    mg->Add(f33, "L");
+    mg->Add(f44, "L");
+    //mg->add(f22);
+    mg->Draw("A RX P");
 
-    mg->SetTitle("Electron Energy Linearity (51th)");
-    mg->GetXaxis()->SetTitle("E [GeV]");
-    mg->GetYaxis()->SetTitle("Response");
-
-    //mg->SetMinimum(0.98);
-    //mg->SetMaximum(1.02);
+    mg->SetTitle("Electron Energy Resolution (51th)");
+    mg->GetXaxis()->SetTitle("1/#sqrt{E} [GeV^{-1/2}]");
+    mg->GetYaxis()->SetTitle("#sigma/E");
 
 // legend------------------------------------------------------
-   TLegend *leg = new TLegend(0.75, 0.1, 0.9, 0.35);
-  //  TLegend *leg = new TLegend(0.7, 0.75, 0.9, 0.9);
-                                //   (           x2, y2)
-                                //   (x1, y1,          )
+   TLegend *leg = new TLegend(0.6, 0.6, 0.9, 0.9);
 
-  string c_f = "#color[4]{C}";
+  string c_f = "#color[4]{#splitline{C : "+to_string(f2->GetParameter(1))+" #pm "+to_string(f2->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f2->GetParameter(0))+ " #pm "+to_string(f2->GetParError(0))+"}{#chi^{2} / n : "
+                                      +to_string(f2->GetChisquare())+" / "+to_string(f2->GetNDF())+"}}";
   const char* c_ff = c_f.c_str();
   leg->AddEntry(gre2, c_ff, "lpe");
-
-  string s_f = "#color[2]{S}";                               
+  string s_f = "#color[2]{#splitline{S : "+to_string(f3->GetParameter(1))+" #pm "+to_string(f3->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f3->GetParameter(0))+ " #pm "+to_string(f3->GetParError(0))+"}{#chi^{2} / n : "
+                                    +to_string(f3->GetChisquare())+" / "+to_string(f3->GetNDF())+"}}";
   const char* s_ff = s_f.c_str();
   leg->AddEntry(gre3, s_ff, "lpe");
-
-  string a_f = "#color[1]{Sum}";                                 
+  string a_f = "#color[1]{#splitline{Sum : "+to_string(f4->GetParameter(1))+" #pm "+to_string(f4->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f4->GetParameter(0))+ " #pm "+to_string(f4->GetParError(0))+"}{#chi^{2} / n : "
+                                    +to_string(f4->GetChisquare())+" / "+to_string(f4->GetNDF())+"}}";
   const char* a_ff = a_f.c_str();
   leg->AddEntry(gre4, a_ff, "lpe");
+  // string c_f = "#color[4]{#splitline{C : "+to_string(f2->GetParameter(1))+" / "+"#sqrt{E} + "+to_string(f2->GetParameter(0))+ +" }{#chi^{2} / n : "
+  //                                     +to_string(f2->GetChisquare())+" / "+to_string(f2->GetNDF())+" }}";
+  // const char* c_ff = c_f.c_str();
+  // leg->AddEntry(gre2, c_ff, "lpe");
 
-  leg->SetMargin(0.05);
-  leg->Draw("p");
+  // string s_f = "#color[2]{#splitline{S : "+to_string(f3->GetParameter(1))+" / "+"#sqrt{E} + "+to_string(f3->GetParameter(0))+ " }{#chi^{2} / n : "
+  //                                   +to_string(f3->GetChisquare())+" / "+to_string(f3->GetNDF())+" }}";
+  // const char* s_ff = s_f.c_str();
+  // leg->AddEntry(gre3, s_ff, "lpe");
+
+  // string a_f = "#color[1]{#splitline{Sum : "+to_string(f4->GetParameter(1))+" / "+"#sqrt{E} + "+to_string(f4->GetParameter(0))+ " }{#chi^{2} / n : "
+  //                                   +to_string(f4->GetChisquare())+" / "+to_string(f4->GetNDF())+" }}";
+  // const char* a_ff = a_f.c_str();
+  // leg->AddEntry(gre4, a_ff, "lpe");
+
+  leg->SetMargin(0.2);
+  leg->Draw();
     cout<<""<<endl;
-
-  myc->SaveAs("ele_linearity.png");
+  myc->SaveAs("ele_resolution.png");
 
 }
 
@@ -137,7 +184,7 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
         else{
             energy = "5";
         } 
-        FileName = "/fcc/tikim/results/ele/lead/"+energy+"GeV_CSS_MS_Error.txt";
+        FileName = "/fcc/tikim/HEP-FCC_dual-readout_001/dual-readout/install/ele/"+energy+"GeV_CSS_MS_Error.txt";
         // FileName = "/data4/tikim/dual-readout/install/0_pion/"+energy+"GeV_pi/"+energy+"GeV_pi_CSS_MS_Error.txt";
         ifstream myfile (FileName);//("/data4/tikim/dual-readout/install/0_pion/10GeV_pi/10GeV_pi_CSS_MS_Error.txt");
         while ( getline (myfile,line) )
@@ -226,27 +273,30 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
   if (p==2) {
     //p==2 > cheren~
     for (i=0; i<n; i++) {
-      x[i] = DoubleMS[i][6];
+      x[i] = 1/sqrt(DoubleMS[i][6]);
       // 1/sqrt(E)
-      y[i]= DoubleMS[i][0]/DoubleMS[i][6];
+      y[i]= DoubleMS[i][1]/DoubleMS[i][0];
       //  simga/mean
       
       //e[i]=0;
+      e[i] = (DoubleMS[i][1]/DoubleMS[i][0])*sqrt(pow(DoubleMS_Error[i][0]/DoubleMS[i][0],2)+pow(DoubleMS_Error[i][1]/DoubleMS[i][1],2));
       // 
     }
   }
   if (p==3) {
     for (i=0; i<n; i++) {
-      x[i] = DoubleMS[i][6];
-      y[i]= DoubleMS[i][2]/DoubleMS[i][6];
+      x[i] = 1/sqrt(DoubleMS[i][6]);
+      y[i]= DoubleMS[i][3]/DoubleMS[i][2];
       //e[i]=0;
+      e[i] = (DoubleMS[i][3]/DoubleMS[i][2])*sqrt(pow(DoubleMS_Error[i][2]/DoubleMS[i][2],2)+pow(DoubleMS_Error[i][3]/DoubleMS[i][3],2));
     }
   }
   if (p==4) {
     for (i=0; i<n; i++) {
-      x[i] = DoubleMS[i][6];
-      y[i]= DoubleMS[i][4]/(2*DoubleMS[i][6]);
+      x[i] = 1/sqrt(DoubleMS[i][6]);
+      y[i]= DoubleMS[i][5]/DoubleMS[i][4];
       //e[i]=0;
+      e[i] = (DoubleMS[i][5]/DoubleMS[i][4])*sqrt(pow(DoubleMS_Error[i][4]/DoubleMS[i][4],2)+pow(DoubleMS_Error[i][5]/DoubleMS[i][5],2));
     }
   }
 }

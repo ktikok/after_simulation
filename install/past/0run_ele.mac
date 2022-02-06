@@ -1,0 +1,27 @@
+#This macro can not be executed standalone
+/DRsim/action/useHepMC False
+/DRsim/action/useCalib True
+# yz플레인에 고정. 
+# 35가 아니라 40정도로 바뀐이유는.. 거리가 고정되지 않아서. 1.8미터로 고정시키는게 일렉트론이 날아가는 시간을 정할 수 있음.
+# 시간이 5나노세컨드 정도 더 걸려서 뒤로 밀린거다. 
+# 타워넘버가 올라갈수록 멀어지므로 고정시켜서 시간을 정해야함.
+# 샤워에서 뎁쓰 구할 때도 영향을 미칠 수 있다. 
+
+
+/vis/disable
+/run/numberOfThreads 1
+/run/initialize
+/run/verbose 1
+
+/DRsim/generator/randx 10
+/DRsim/generator/randy 10
+# 0이면 빔라인이 되어서... 1cm로
+
+/DRsim/generator/theta -0.97694993
+/DRsim/generator/phi 0.017453293
+/DRsim/generator/y0 -3.170329668
+/DRsim/generator/z0 -14.62319386
+
+/gun/particle e-
+/gun/energy 20 GeV
+/run/beamOn 2

@@ -9,9 +9,9 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p);
 void ReverseXAxis (TH1 *h);
 void ReverseYAxis (TH1 *h);
 
-void ele_linearity()
+void ele_linearity_six_point()
 {
-  Int_t n = 8;
+  Int_t n = 6;
   Double_t *x = new Double_t[n];
   Double_t *y = new Double_t[n];
   Double_t *e = new Double_t[n];
@@ -110,33 +110,33 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
 
     string energy;
     string FileName;
-    for (int j=0; j<8; j++) {
+    for (int j=0; j<n; j++) {
         LineNum=0;
         
         if(j==0){
-            energy = "110";
-        } 
-        else if(j==1){
-            energy = "90";
-        } 
-        else if(j==2){
-            energy = "70";
-        } 
-        else if(j==3){
-            energy = "50";
-        } 
-        else if(j==4){
-            energy = "30";
-        } 
-        else if(j==5){
-            energy = "20";
-        } 
-        else if(j==6){
-            energy = "10";
-        } 
-        else{
             energy = "5";
         } 
+        else if(j==1){
+            energy = "10";
+        } 
+        else if(j==2){
+            energy = "20";
+        } 
+        else if(j==3){
+            energy = "30";
+        } 
+        else if(j==4){
+            energy = "50";
+        } 
+        else if(j==5){
+            energy = "70";
+        } 
+        else if(j==6){
+            energy = "90";
+        } 
+        else{
+            energy = "110";
+        }  
         FileName = "/fcc/tikim/results/ele/lead/"+energy+"GeV_CSS_MS_Error.txt";
         // FileName = "/data4/tikim/dual-readout/install/0_pion/"+energy+"GeV_pi/"+energy+"GeV_pi_CSS_MS_Error.txt";
         ifstream myfile (FileName);//("/data4/tikim/dual-readout/install/0_pion/10GeV_pi/10GeV_pi_CSS_MS_Error.txt");
@@ -189,7 +189,7 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
         
         //break;
     }
-    for (int j=0; j<8; j++) {
+    for (int j=0; j<n; j++) {
         for (int i=0; i<6; i++) {
             //cout << StringValues[j][i] << " ";
             stringstream ss(StringValues[j][2*i]);
@@ -198,22 +198,22 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
             ss1>>DoubleMS_Error[j][i];
         }
     }
-    DoubleMS[0][6]=110;
-    DoubleMS_Error[0][6]=110;
-    DoubleMS[1][6]=90;
-    DoubleMS_Error[1][6]=90;
-    DoubleMS[2][6]=70;
-    DoubleMS_Error[2][6]=70;
-    DoubleMS[3][6]=50;
-    DoubleMS_Error[3][6]=50;
-    DoubleMS[4][6]=30;
-    DoubleMS_Error[4][6]=30;
-    DoubleMS[5][6]=20;
-    DoubleMS_Error[5][6]=20;
-    DoubleMS[6][6]=10;
-    DoubleMS_Error[6][6]=10;
-    DoubleMS[7][6]=5;
-    DoubleMS_Error[7][6]=5;
+    DoubleMS[7][6]=110;
+    DoubleMS_Error[7][6]=110;
+    DoubleMS[6][6]=90;
+    DoubleMS_Error[6][6]=90;
+    DoubleMS[5][6]=70;
+    DoubleMS_Error[5][6]=70;
+    DoubleMS[4][6]=50;
+    DoubleMS_Error[4][6]=50;
+    DoubleMS[3][6]=30;
+    DoubleMS_Error[3][6]=30;
+    DoubleMS[2][6]=20;
+    DoubleMS_Error[2][6]=20;
+    DoubleMS[1][6]=10;
+    DoubleMS_Error[1][6]=10;
+    DoubleMS[0][6]=5;
+    DoubleMS_Error[0][6]=5;
 
 
   //analysis.cc에서 바로 가져오기. 

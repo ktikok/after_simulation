@@ -1,0 +1,15 @@
+/DRsim/action/useHepMC False
+/DRsim/action/useCalib True
+/vis/disable
+/run/numberOfThreads 1
+/run/initialize
+/run/verbose 1
+/DRsim/generator/randx 10
+/DRsim/generator/randy 10
+/DRsim/generator/theta -0.03728991884
+/DRsim/generator/phi 0.01745329252
+/DRsim/generator/y0 -3.142302266
+/DRsim/generator/z0 -4.716005797
+/gun/particle e-
+/gun/energy 5 GeV
+/run/beamOn 2

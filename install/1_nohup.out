@@ -1,0 +1,13 @@
+starting submit for 5 GeV e- and the output will be e_5GeV_0th.root
+
+mkdir: cannot create directory ‘/fcc/tikim/results/ele/lead/e_5GeV_0th/’: File exists
+Submitting job(s)....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+500 job(s) submitted to cluster 1214.
+Simulation is done
+preparing analysis
+hadd Target file: /fcc/tikim/results/ele/lead/e_5GeV_0th//e_5GeV_0th.root
+hadd compression setting for all output: 1
+Error in <TFile::TFile>: file /fcc/tikim/results/ele/lead/e_5GeV_0th//e_5GeV_0th.root already exists
+Error in <TFileMerger::OutputFile>: cannot open the MERGER output file 
+hadd error opening target file (does /fcc/tikim/results/ele/lead/e_5GeV_0th//e_5GeV_0th.root exist?).
+Pass "-f" argument to force re-creation of output file.
