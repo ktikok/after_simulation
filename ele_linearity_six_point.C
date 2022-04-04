@@ -57,10 +57,16 @@ void ele_linearity_six_point()
     mg->Add(gre4);
     
     mg->Draw("A P");
+    
+    //////////////////////////////////////////////////////////////////// change name
+    mg->SetTitle("Electron Energy Linearity (Iron, 0th, theta1.5)");
+    //////////////////////////////////////////////////////////////////// change name
 
-    mg->SetTitle("Electron Energy Linearity (51th)");
     mg->GetXaxis()->SetTitle("E [GeV]");
     mg->GetYaxis()->SetTitle("Response");
+    
+    mg->GetYaxis()->SetRangeUser(0.980,1.020);
+    // axis range
 
     //mg->SetMinimum(0.98);
     //mg->SetMaximum(1.02);
@@ -137,7 +143,11 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
         else{
             energy = "110";
         }  
-        FileName = "/fcc/tikim/results/ele/lead/"+energy+"GeV_CSS_MS_Error.txt";
+
+        //////////////////////////////////////////////////////////////////// change name
+        FileName = "/fcc/tikim/results/ele/iron/"+energy+"GeV_CSS_MS_Error.txt";
+        //////////////////////////////////////////////////////////////////// change name
+        
         // FileName = "/data4/tikim/dual-readout/install/0_pion/"+energy+"GeV_pi/"+energy+"GeV_pi_CSS_MS_Error.txt";
         ifstream myfile (FileName);//("/data4/tikim/dual-readout/install/0_pion/10GeV_pi/10GeV_pi_CSS_MS_Error.txt");
         while ( getline (myfile,line) )

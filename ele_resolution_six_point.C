@@ -1,3 +1,5 @@
+// conda activate /fcc/tikim/mytool/miniconda3/envs/Root_ReverseGraph/
+
 #include "TGraphErrors.h"
 #include "TF1.h"
 #include "TRandom.h"
@@ -97,22 +99,33 @@ void ele_resolution_six_point()
     //mg->add(f22);
     mg->Draw("A RX P");
 
-    mg->SetTitle("Electron Energy Resolution (51th)");
+    //////////////////////////////////////////////////////////////////// change name
+    mg->SetTitle("Electron Energy Resolution (Iron, 0th, theta1.5)"); 
+    //////////////////////////////////////////////////////////////////// 
+    
     mg->GetXaxis()->SetTitle("1/#sqrt{E} [GeV^{-1/2}]");
     mg->GetYaxis()->SetTitle("#sigma/E");
 
 // legend------------------------------------------------------
    TLegend *leg = new TLegend(0.6, 0.6, 0.9, 0.9);
 
-  string c_f = "#color[4]{#splitline{C : "+to_string(f2->GetParameter(1))+" #pm "+to_string(f2->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f2->GetParameter(0))+ " #pm "+to_string(f2->GetParError(0))+"}{#chi^{2} / n : "
+  // string c_f = "#color[4]{#splitline{C : "+to_string(f2->GetParameter(1))+" #pm "+to_string(f2->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f2->GetParameter(0))+ " #pm "+to_string(f2->GetParError(0))+"}{#chi^{2} / n : "
+  // the above one is for +- term
+
+  // string c_f = "#color[4]{#splitline{C : "+to_string(f2->GetParameter(1))+" #pm "+to_string(f2->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f2->GetParameter(0))+ " #pm "+to_string(f2->GetParError(0))+"}{#chi^{2} / n : "
+  string c_f = "#color[4]{#splitline{C : "+to_string(f2->GetParameter(1))+" #pm "+to_string(f2->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f2->GetParameter(0))+"}{#chi^{2} / n : "
                                       +to_string(f2->GetChisquare())+" / "+to_string(f2->GetNDF())+"}}";
   const char* c_ff = c_f.c_str();
   leg->AddEntry(gre2, c_ff, "lpe");
-  string s_f = "#color[2]{#splitline{S : "+to_string(f3->GetParameter(1))+" #pm "+to_string(f3->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f3->GetParameter(0))+ " #pm "+to_string(f3->GetParError(0))+"}{#chi^{2} / n : "
+
+  // string s_f = "#color[2]{#splitline{S : "+to_string(f3->GetParameter(1))+" #pm "+to_string(f3->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f3->GetParameter(0))+ " #pm "+to_string(f3->GetParError(0))+"}{#chi^{2} / n : "
+  string s_f = "#color[2]{#splitline{S : "+to_string(f3->GetParameter(1))+" #pm "+to_string(f3->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f3->GetParameter(0))+"}{#chi^{2} / n : "
                                     +to_string(f3->GetChisquare())+" / "+to_string(f3->GetNDF())+"}}";
   const char* s_ff = s_f.c_str();
   leg->AddEntry(gre3, s_ff, "lpe");
-  string a_f = "#color[1]{#splitline{Sum : "+to_string(f4->GetParameter(1))+" #pm "+to_string(f4->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f4->GetParameter(0))+ " #pm "+to_string(f4->GetParError(0))+"}{#chi^{2} / n : "
+  
+  // string a_f = "#color[1]{#splitline{Sum : "+to_string(f4->GetParameter(1))+" #pm "+to_string(f4->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f4->GetParameter(0))+ " #pm "+to_string(f4->GetParError(0))+"}{#chi^{2} / n : "
+  string a_f = "#color[1]{#splitline{Sum : "+to_string(f4->GetParameter(1))+" #pm "+to_string(f4->GetParError(1))+" / "+"#sqrt{E} + "+to_string(f4->GetParameter(0))+"}{#chi^{2} / n : "
                                     +to_string(f4->GetChisquare())+" / "+to_string(f4->GetNDF())+"}}";
   const char* a_ff = a_f.c_str();
   leg->AddEntry(gre4, a_ff, "lpe");
@@ -184,7 +197,11 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
         else{
             energy = "110";
         } 
-        FileName = "/fcc/tikim/results/ele/lead/"+energy+"GeV_CSS_MS_Error.txt";
+    
+        //////////////////////////////////////////////////////////////////// change name    
+        FileName = "/fcc/tikim/results/ele/iron/"+energy+"GeV_CSS_MS_Error.txt";
+        //////////////////////////////////////////////////////////////////// change name
+
         // FileName = "/data4/tikim/dual-readout/install/0_pion/"+energy+"GeV_pi/"+energy+"GeV_pi_CSS_MS_Error.txt";
         ifstream myfile (FileName);//("/data4/tikim/dual-readout/install/0_pion/10GeV_pi/10GeV_pi_CSS_MS_Error.txt");
         while ( getline (myfile,line) )
