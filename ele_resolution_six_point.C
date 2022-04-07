@@ -74,6 +74,7 @@ void ele_resolution_six_point()
   gre4->SetMarkerColor(kBlack);
   gre4->SetLineColor(kBlack); 
   gre4->Fit("pol1");
+  
   //Access the fit resuts
   
   TF1 *f4 = gre4->GetFunction("pol1");
@@ -148,6 +149,23 @@ void ele_resolution_six_point()
   leg->Draw();
     cout<<""<<endl;
   myc->SaveAs("ele_resolution.png");
+
+  TFile* validFile = new TFile(+"iron_resolution.root","RECREATE");
+  // validFile->WriteTObject(myc);
+  gre2->SetTitle("c_resolution");
+  gre2->SetName("c_resolution");
+
+  gre3->SetTitle("s_resolution");
+  gre3->SetName("s_resolution");
+
+  gre4->SetTitle("sum_resolution");
+  gre4->SetName("sum_resolution");
+
+  validFile->WriteTObject(gre2);
+  validFile->WriteTObject(gre3);
+  validFile->WriteTObject(gre4);
+
+  validFile->Close();
 
 }
 
@@ -243,7 +261,7 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
                     }
                 }
                 flag1=line[i];
-//  
+
 
             }
             LineNum=LineNum+1;
@@ -317,3 +335,4 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
     }
   }
 }
+
