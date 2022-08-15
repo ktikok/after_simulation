@@ -101,7 +101,7 @@ void ele_resolution_six_point()
     mg->Draw("A RX P");
 
     //////////////////////////////////////////////////////////////////// change name
-    mg->SetTitle("Electron Energy Resolution (Iron, 0th, theta1.5)"); 
+    mg->SetTitle("Electron Energy Resolution (Brass, 0th, theta1.5)"); 
     //////////////////////////////////////////////////////////////////// 
     
     mg->GetXaxis()->SetTitle("1/#sqrt{E} [GeV^{-1/2}]");
@@ -150,7 +150,7 @@ void ele_resolution_six_point()
     cout<<""<<endl;
   myc->SaveAs("ele_resolution.png");
 
-  TFile* validFile = new TFile(+"iron_resolution.root","RECREATE");
+  TFile* validFile = new TFile(+"Brass_resolution.root","RECREATE");
   // validFile->WriteTObject(myc);
   gre2->SetTitle("c_resolution");
   gre2->SetName("c_resolution");
@@ -217,7 +217,7 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
         } 
     
         //////////////////////////////////////////////////////////////////// change name    
-        FileName = "/fcc/tikim/results/ele/iron/"+energy+"GeV_CSS_MS_Error.txt";
+        FileName = "/fcc/tikim/results/ele/brass/"+energy+"GeV_CSS_MS_Error.txt";
         //////////////////////////////////////////////////////////////////// change name
 
         // FileName = "/data4/tikim/dual-readout/install/0_pion/"+energy+"GeV_pi/"+energy+"GeV_pi_CSS_MS_Error.txt";

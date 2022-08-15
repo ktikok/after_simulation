@@ -1,0 +1,83 @@
+ssh_exchange_identification: read: Connection reset by peer
+lost connection
+Start lead! (It takes long time.)
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+[169839.4256198347, 178163, ['lead', '50GeV', 'count:', 242, 'max:', 178163, 'ave:', 169839.4256198347, ', min:', 161552, ',', 'time:', 1.0, 23.0, ':', 10.0, ':', 39.42561983471387]]
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+[234170.6204379562, 244332, ['lead', '70GeV', 'count:', 274, 'max:', 244332, 'ave:', 234170.6204379562, ', min:', 224224, ',', 'time:', 2.0, 17.0, ':', 2.0, ':', 50.62043795621139]]
+Start tungsten! (It takes long time.)
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+[98352.17378917379, 106737, ['tungsten', '50GeV', 'count:', 351, 'max:', 106737, 'ave:', 98352.17378917379, ', min:', 90030, ',', 'time:', 1.0, 3.0, ':', 19.0, ':', 12.173789173786645]]
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+[137208.30088495577, 149051, ['tungsten', '70GeV', 'count:', 339, 'max:', 149051, 'ave:', 137208.30088495577, ', min:', 125678, ',', 'time:', 1.0, 14.0, ':', 6.0, ':', 48.30088495576638]]
+Start tungsten_theta3! (It takes long time.)
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+[103828.49193548386, 108928, ['tungsten_theta3', '50GeV', 'count:', 248, 'max:', 108928, 'ave:', 103828.49193548386, ', min:', 98864, ',', 'time:', 1.0, 4.0, ':', 50.0, ':', 28.491935483863926]]
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+Please wait..
+[141299.59744408945, 153631, ['tungsten_theta3', '70GeV', 'count:', 313, 'max:', 153631, 'ave:', 141299.59744408945, ', min:', 129094, ',', 'time:', 1.0, 15.0, ':', 14.0, ':', 59.59744408944971]]
+Traceback (most recent call last):
+  File "/fcc/tikim/after_simulation/time.py", line 100, in <module>
+    fp.write("%s\n" % str(i))
+NameError: name 'i' is not defined

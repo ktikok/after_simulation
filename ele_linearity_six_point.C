@@ -66,7 +66,7 @@ void ele_linearity_six_point()
     mg->Draw("A P");
     
     //////////////////////////////////////////////////////////////////// change name
-    mg->SetTitle("Electron Energy Linearity (Iron, 0th, theta1.5)");
+    mg->SetTitle("Electron Energy Linearity (Brass, 0th, theta1.5)");
     //////////////////////////////////////////////////////////////////// change name
 
     mg->GetXaxis()->SetTitle("E [GeV]");
@@ -102,7 +102,7 @@ void ele_linearity_six_point()
 
   myc->SaveAs("ele_linearity.png");
 
-  TFile* validFile = new TFile(+"iron_linearity.root","RECREATE");
+  TFile* validFile = new TFile(+"Brass_linearity.root","RECREATE");
   gre2->SetTitle("c");
   gre2->SetName("c");
 
@@ -173,7 +173,7 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
         }  
 
         //////////////////////////////////////////////////////////////////// change name
-        FileName = "/fcc/tikim/results/ele/iron/"+energy+"GeV_CSS_MS_Error.txt";
+        FileName = "/fcc/tikim/results/ele/brass/"+energy+"GeV_CSS_MS_Error.txt";
         //////////////////////////////////////////////////////////////////// change name
         
         // FileName = "/data4/tikim/dual-readout/install/0_pion/"+energy+"GeV_pi/"+energy+"GeV_pi_CSS_MS_Error.txt";
@@ -265,9 +265,9 @@ void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
     //p==2 > cheren~
     for (i=0; i<n; i++) {
       x[i] = DoubleMS[i][6];
-      // 1/sqrt(E)
+      // E
       y[i]= DoubleMS[i][0]/DoubleMS[i][6];
-      //  simga/mean
+      //  E_simulation/E_true
       
       //e[i]=0;
       // 

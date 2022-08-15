@@ -1,0 +1,56 @@
+conda_activate
+conda activate Root_ReverseGraph
+cd /fcc/tikim/after_simulation
+
+----------------------------------------------------------------------
+
+{ TFile *f = TFile::Open("sum_spec.root"); f->ls(); TCanvas *myc; f->GetObject("sum_spec", myc); myc->ls(); 
+TMultiGraph *mg = ((TMultiGraph *)(myc->FindObject("mg"))); 
+mg->GetListOfGraphs()->ls(); 
+TGraphErrors *g = ((TGraphErrors *)(mg->GetListOfGraphs()->FindObject("copper"))); 
+----------------------------------------------------------------------
+
+
+TCanvas *c_gTally14 = new TCanvas("c_gTally14", "c_gTally14"); g->Draw("ALP"); }
+이건 nullptr이 뜸... 멀티그래프에서
+----------------------------------------------------------------------
+
+TList* l = c->GetListOfPrimitives();
+myc->GetListOfPrimitives()->Print()
+myc->GetListOfPrimitives()->First()->Print()
+myc->GetListOfPrimitives()->First()
+myc->GetListOfPrimitives()->Last()
+myc->GetListOfPrimitives()->At(1)->Print()
+//or
+THStack *s = (THStack*)c->GetListOfPrimitives()->At(1);
+// this will give you x,y values
+----------------------------------------------------------------------
+
+//To get the individuals graphs from a TMultiGraph you should do a loop similar to:
+   TList* grlist;
+   grlist = mg->GetListOfGraphs();
+   printf("This multi-graph contains %d graphs\n",grlist->GetSize());
+   TIter next(grlist);
+   TObject *obj;
+   TGraph *gr;
+  
+   while ((obj = next())) {
+  	gr=(TGraph*)obj;
+...
+   }
+----------------------------------------------------------------------
+
+myc->Savesource()
+//이건 mobaxterm켜고, myc->Draw() 해서 창을 띄운 이후에 
+
+----------------------------------------------------------------------
+Create/open the file before creating the canvases, then write them with Write (make sure the canvases have different names, not just different pointer/variable names); check the User’s guide for the options.
+
+TFile *f = new TFile("file.root", "RECREATE");  // recreate deletes the file if it already exists
+// create and do stuff...
+
+f->cd();   // make sure they will be written to f
+h1->Write();  // you can specify here the name of the canvas inside the file, e.g. h1->Write("canvas1")...
+h2->Write();
+f->Close();
+// ...

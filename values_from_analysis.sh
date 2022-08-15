@@ -17,8 +17,8 @@ do
     # cat "/data4/tikim/dual-readout/install/0_pion/3000Events/${j}GeV_pi/${root_name}_nohup.out" | grep 'Sigma\|Mean\|StdDev' > "/data4/tikim/dual-readout/install/0_pion/3000Events/${j}GeV_pi/${j}GeV_pi_CSS_MS_Error.txt"
     
     #//////////////////////////////////////////////////////////////////// change name
-    cat "/fcc/tikim/results/ele/iron/e_${j}GeV_0th/e_${j}GeV_0th_nohup.out" | grep 'Sigma\|Mean\|StdDev' > "/fcc/tikim/results/ele/iron/${j}GeV_CSS_MS_Error.txt"
+    cat "/fcc/tikim/results/ele/brass/e_${j}GeV_0th/e_${j}GeV_0th_nohup.out" | grep 'Sigma\|Mean\|StdDev' > "/fcc/tikim/results/ele/brass/${j}GeV_CSS_MS_Error.txt"
     #//////////////////////////////////////////////////////////////////// change name
     
-    #    /fcc/tikim/results/ele/lead/e_5GeV_0th/e_5GeV_0th_nohup.out
+    #    /fcc/tikim/results/ele/brass/e_5GeV_0th/e_5GeV_0th_nohup.out
 done
